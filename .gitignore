@@ -254,3 +254,4 @@ docs
 create_kml.py
 .venv_dev
 .venv_prod
+visits.txt
