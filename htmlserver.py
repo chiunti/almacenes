@@ -1,5 +1,7 @@
 import os
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
+from map import mapa_almacenes
+import sys
 
 app = Flask(__name__)
 
@@ -50,8 +52,41 @@ def webmanifest():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    q = request.args.get('q', '').strip().lower()
+    visitas_path = os.path.join(app.root_path, 'data', 'visits.txt')
+    if not os.path.exists(visitas_path):
+        with open(visitas_path, 'w') as f:
+            f.write('0')
+    with open(visitas_path, 'r+') as f:
+        visitas = int(f.read() or 0) + 1
+        f.seek(0)
+        f.write(str(visitas))
+        f.truncate()
+
+    m = mapa_almacenes(q)
+    mapa_html = m.get_root().render()
+    mapa_html = m.get_root().html.render()
+    header_html = m.get_root().header.render()
+    script_html = m.get_root().script.render()
+    return render_template('index.html',
+                           header_html=header_html,
+                           mapa_html=mapa_html,
+                           script_html=script_html,
+                           visitas=visitas,
+                           busqueda=q)
+
+
+@app.route('/visitas')
+def visitas():
+    visitas_path = os.path.join(app.root_path, 'data', 'visits.txt')
+    if not os.path.exists(visitas_path):
+        return {'visitas': 0}
+    with open(visitas_path) as f:
+        return {'visitas': int(f.read() or 0)}
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    if '--debug' in sys.argv:
+        app.run(host='0.0.0.0', port=8000, debug=True)
+    else:
+        app.run(host='0.0.0.0', port=8000)

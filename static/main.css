@@ -1,0 +1,255 @@
+.folium-popup-content { font-size: 1rem; }
+
+.visit-counter {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background: #f8d568cc;
+    color: #800000;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    z-index: 1000;
+    box-shadow: 1px 1px 6px #0001;
+}
+.search-bar {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    width: 400px;
+    max-width: 95vw;
+    background: #fff9;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #0002;
+    display: flex;
+    gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    html, body {
+        height: 100dvh;
+        min-height: 100dvh;
+    }
+    #map {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+        z-index: 0;
+    }
+    .search-bar {
+        width: 98vw;
+        left: 1vw;
+        transform: none;
+        font-size: 1rem;
+        padding: 0.4rem 0.4rem;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    .visit-counter {
+        right: 0.5rem;
+        top: 0.5rem;
+        font-size: 1rem;
+        padding: 0.4rem 0.7rem;
+    }
+    .ieepo-title {
+        left: 0.5rem;
+        bottom: 1rem;
+        font-size: 1.1rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+
+
+
+
+
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    /* Remove default body margin */
+}
+
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    /* Align items to start and end */
+    align-items: center;
+    padding: 10px 10px;
+    /* Add some side padding */
+    background-color: #f2f2f2;
+    width: 100%;
+    box-sizing: border-box;
+    /* Include padding in width */
+}
+
+#header h2 {
+    margin: 0;
+    /* Remove default heading margin */
+    color: #333;
+    /* Darker heading color */
+}
+
+#header form {
+    margin: 0;
+    /* Remove default form margin */
+}
+
+#header button {
+    background-color: #007bff;
+    /* Blue button */
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#header button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+#busqueda-form {
+    display: flex;
+    width: 100%;
+    padding: 0 0 0 10px;
+}
+
+#busqueda {
+    margin: auto;
+    width: 95%;
+}
+
+.folium-map {
+    flex-grow: 1;
+    /* Allow map to take up available space */
+    width: 100%;
+    /* height: calc(100% - 58px) !important; */
+    /* Subtract header height from map height */
+    box-sizing: border-box;
+}
+
+input[type="text"] {
+    width: calc(100% - 12px);
+    /* Account for padding and border */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Include padding and border in element's total width and height */
+}
+
+#clearButton {
+    position: absolute;
+    top: 25px;
+    right: 65px;
+    transform: translateY(-50%);
+    background-color: #ff9999 !important;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0px !important;
+    z-index: 1;
+    width: 30px;
+    height: 25px;
+    border-radius: 8px;
+}
+
+#clearButton:hover {
+    background-color: #ff0000 !important;
+}
+
+.map-title {
+    position: fixed;
+    bottom: 15px;
+    left: 10px;
+    z-index: 9999;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Ajustar el margen para pantallas pequeñas */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Ajustar el ancho para pantallas pequeñas */
+    max-width: 600px;
+    position: relative;
+    overflow: auto;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.graficoPastel {
+    width: 100%;
+    height: 400px; /* Reducir la altura para pantallas pequeñas */
+    margin: 0 auto;
+}
+
+#btnGraficoDiv {
+    position: fixed;
+    bottom: 15px;
+    right: 10px;
+    z-index: 9998;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    width: 60px;
+}
+
+/* Media query para pantallas pequeñas (hasta 768px de ancho) */
+@media (max-width: 768px) {
+    .popup-content {
+        margin: 20% auto; /* Reducir aún más el margen */
+        width: 95%; /* Aumentar el ancho en pantallas muy pequeñas */
+    }
+
+    .graficoPastel {
+        height: 350px; /* Ajustar la altura para pantallas muy pequeñas */
+    }
+}

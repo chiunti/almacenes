@@ -251,7 +251,6 @@ $RECYCLE.BIN/
 
 
 docs
-map.py
 create_kml.py
 .venv_dev
 .venv_prod
